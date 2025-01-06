@@ -1,2 +1,2 @@
 # pisteroid
-Boot.dev Asteroid course with PiGame
+Boot.dev Asteroid course with PyGame
