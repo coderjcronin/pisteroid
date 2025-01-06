@@ -7,6 +7,7 @@ class Player(CircleShape):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.shot_delay = 0
 
     def draw(self, screen):
         # sub-classes must override
@@ -29,10 +30,15 @@ class Player(CircleShape):
         self.position += forward * PLAYER_SPEED * dt
 
     def shoot(self, dt):
+        if self.shot_delay > 0:
+            return
         bullet = Shot(self.position[0], self.position[1])
         bullet.velocity = pygame.Vector2(0,1).rotate(self.rotation) * PLAYER_SHOOT_SPEED * PLAYER_SPEED* dt
+        self.shot_delay = PLAYER_SHOOT_COOLDOWN
     
     def update(self, dt):
+        self.shot_delay -= dt
+        
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_a]:
