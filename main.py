@@ -39,6 +39,9 @@ def main ():
             if player.did_we_collide(rock):
                 print("Game Over!")
                 sys.exit()
+            for bullet in shots:
+                if rock.did_we_collide(bullet):
+                    rock.kill()
 
         for thing in drawable:
             thing.draw(screen)
